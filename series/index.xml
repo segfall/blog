@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Series on static.blog</title>
+    <link>https://segfall.github.io/blog/series/</link>
+    <description>Recent content in Series on static.blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://segfall.github.io/blog/series/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo 101</title>
+      <link>https://segfall.github.io/blog/series/hugo-101/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://segfall.github.io/blog/series/hugo-101/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

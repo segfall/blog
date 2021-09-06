@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Comments on static.blog</title>
+    <link>https://segfall.github.io/blog/comment/</link>
+    <description>Recent content in Comments on static.blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://segfall.github.io/blog/comment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://segfall.github.io/blog/comment/b14e340/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://segfall.github.io/blog/comment/b14e340/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://segfall.github.io/blog/comment/b3562ea/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://segfall.github.io/blog/comment/b3562ea/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
