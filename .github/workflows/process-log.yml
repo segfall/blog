@@ -1,0 +1,106 @@
+name: build_blog
+
+on:
+  push:
+    branches:
+      - master
+  repository_dispatch:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    concurrency: process_data
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Checkout blog-src repo
+        uses: actions/checkout@v2
+        with:
+          repository: segfall/blog-src
+          fetch-depth: 0
+          path: blog-src
+
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Build ETL
+        run: |
+          git pull
+          deno run --unstable --allow-write --allow-read --allow-run process.js
+
+      - name: Commit ETL
+        uses: EndBug/add-and-commit@v7 # You can change this to use a specific version.
+        with:
+          add: 'data logs'
+          author_name: Comment Bot
+          author_email: mail@example.com
+          message: 'ETL'
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.85.0'
+          # extended: true
+
+      - name: Build
+        run: |
+          mkdir ./blog-src/data
+          cp -r ./data/comments.json ./blog-src/data/comments.json
+          cp -r ./data/hugo ./blog-src/content/comment
+          cd blog-src
+          ls -al
+          hugo
+
+      - name: Deploy to foo-bar.surge.sh
+        uses: dswistowski/surge-sh-action@v1
+        with:
+          domain: 'mushy-night.surge.sh'
+          project: './blog-src/public/'
+          login: ${{ secrets.surge_login }}
+          token: ${{ secrets.surge_token }}
+
+
+#      - name: Deploy
+#        uses: peaceiris/actions-gh-pages@v3
+#        if: ${{ github.ref == 'refs/heads/master' }}
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          publish_dir: ./blog-src/public
+
+#      - name: Deploy site to gh-pages branch
+#        uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
+#        with:
+#          repo-token: ${{ secrets.PAT }}
+#          site-directory: ./blog-src/public
+
+
+
+#      - name: Create report file
+#        run: |
+#          date +%s > blog/report.txt
+
+#      - name: Commit report
+#        uses: EndBug/add-and-commit@v7 # You can change this to use a specific version.
+#        with:
+#          cwd: './blog/'
+#          message: 'Adding data'
+#
+#      - name: Commit report
+#        run: |
+#          cd blog
+#          git config --global user.name 'Your Name'
+#          git config --global user.email 'your-username@users.noreply.github.com'
+#          git add .
+#          git commit -m "Automated report"
+#
+#      - name: Push changes
+#        uses: ad-m/github-push-action@master
+#        with:
+#          github_token: ${{ secrets.PAT }}
+#          branch: master
+#          repository: "segfall/blog"
+#          directory: "./blog/"
